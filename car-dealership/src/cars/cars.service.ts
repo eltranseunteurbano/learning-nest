@@ -1,29 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Car } from './interfaces/car.interface';
+import { v4 as uuidv4 } from 'uuid';
+import { CreateCarDto, UpdateCarDto } from './dto';
 
 @Injectable()
 export class CarsService {
   private cars: Car[] = [
     {
-      id: ,
+      id: uuidv4(),
       brand: 'Toyota',
       model: 'Yaris',
       year: 2019,
     },
     {
-      id: 2,
+      id: uuidv4(),
       brand: 'Toyota',
       model: 'Corolla',
       year: 2019,
     },
     {
-      id: 3,
+      id: uuidv4(),
       brand: 'Honda',
       model: 'Civic',
       year: 2019,
     },
     {
-      id: 4,
+      id: uuidv4(),
       brand: 'Jeep',
       model: 'Wrangler',
       year: 2019,
@@ -34,23 +40,41 @@ export class CarsService {
     return this.cars;
   }
 
-  public findOneById(id: number) {
-    return this.cars.find((car) => car.id === id);
+  public findOneById(id: string) {
+    const car = this.cars.find((car) => car.id === id);
+    if (!car) throw new NotFoundException(`Car with id ${id} not found`);
+
+    return car;
   }
 
-  public createCar(car: any) {
-    const newCar = {
-      id: this.cars.length + 1,
+  public createOne(car: CreateCarDto) {
+    const newCar: Car = {
+      id: uuidv4(),
+      year: 1990,
       ...car,
     };
     this.cars.push(newCar);
     return newCar;
   }
 
-  public deleteCarById(id: number) {
-    const carIndex = this.cars.findIndex((car) => car.id === id);
-    if (carIndex === -1) return null;
-    const deletedCars = this.cars.splice(carIndex, 1);
-    return deletedCars[0];
+  public deleteById(id: string) {
+    const currentCar = this.findOneById(id);
+    this.cars = this.cars.filter((car) => car.id !== id);
+    return currentCar;
+  }
+
+  public updateOne(id: string, updateCar: UpdateCarDto) {
+    if (updateCar.id && updateCar.id !== id)
+      throw new BadRequestException('Id in body and param do not match');
+
+    const currentCar = this.findOneById(id);
+    const updatedCar = { ...currentCar, ...updateCar };
+
+    this.cars = this.cars.map((car) => {
+      if (car.id === id) return updatedCar;
+      return car;
+    });
+
+    return updatedCar;
   }
 }
