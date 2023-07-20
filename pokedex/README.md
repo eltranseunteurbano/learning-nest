@@ -41,3 +41,8 @@
  ```
   docker-compose up -d
  ```
+
+ 5. Reconstruir la base de datos con datos semilla
+```
+localhost:300/api/v1/seed
+```
