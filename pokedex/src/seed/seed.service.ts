@@ -20,7 +20,7 @@ export class SeedService {
     await this.pokemonModel.deleteMany({});
 
     const data = await this.http.get<PokeResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=9',
+      'https://pokeapi.co/api/v2/pokemon?limit=900',
     );
 
     const pokemons = data.results.map(({ name, url }) => {
