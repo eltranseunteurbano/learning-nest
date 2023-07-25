@@ -42,7 +42,14 @@
   docker-compose up -d
  ```
 
- 5. Reconstruir la base de datos con datos semilla
+ 5. Clonar el  archivo ```.env.examle``` y renombar la copia a ```.env```
+
+ 6s. Ejecutar la aplicación en dev:
+ ```
+ yarn start:dev
+ ```
+
+ 7. Reconstruir la base de datos con datos semilla
 ```
 localhost:300/api/v1/seed
 ```
