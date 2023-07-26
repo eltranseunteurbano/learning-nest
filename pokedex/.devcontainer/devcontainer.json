@@ -18,24 +18,12 @@
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-			"moby": true,
-			"installDockerBuildx": true,
-			"version": "latest",
-			"dockerDashComposeVersion": "v2"
-		},
-		"ghcr.io/devcontainers-contrib/features/mongodb-atlas-cli-homebrew:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/typescript:2": {
-			"version": "latest"
-		}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers-contrib/features/mongodb-atlas-cli-homebrew:1": {},
+		"ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {},
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {},
+		"ghcr.io/devcontainers-contrib/features/typescript:2": {},
+		"ghcr.io/devcontainers-contrib/features/heroku-cli:1": {}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
